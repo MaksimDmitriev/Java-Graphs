@@ -40,6 +40,10 @@ public class Graph {
 
 	}
 
+	public HashMap<String, Vertex> getMyVertices() {
+		return myVertices;
+	}
+
 	/**
 	 * Add a new vertex name with no neighbors (if vertex does not yet exist)
 	 * 
@@ -164,20 +168,18 @@ public class Graph {
 		return myNumEdges;
 	}
 
-	/*
-	 * Returns adjacency-list representation of graph
-	 */
 	@Override
 	public String toString() {
-		String s = "";
+		StringBuilder builder = new StringBuilder();
 		for (Vertex v : myVertices.values()) {
-			s += v + ": ";
+			builder.append(v).append(Main.COLON).append(Main.SPACE);
+
 			for (Vertex w : myAdjList.get(v)) {
-				s += w + " ";
+				builder.append(w).append(Main.SPACE);
 			}
-			s += "\n";
+			builder.append(Main.EOL);
 		}
-		return s;
+		return builder.toString();
 	}
 
 	public void bfs(Vertex root) {
@@ -197,6 +199,11 @@ public class Graph {
 			}
 			u.setColor(Color.BLACK);
 		}
+	}
+
+	public void dfs(Vertex root) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public static void main(String[] args) {

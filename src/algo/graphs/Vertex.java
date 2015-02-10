@@ -34,6 +34,9 @@ public class Vertex implements Comparable<Vertex> {
 	public static final int INFINITY = Integer.MAX_VALUE;
 
 	public Vertex(String v) {
+		if (v == null || v.isEmpty()) {
+			throw new IllegalArgumentException("The vertex name cannot be null or empty");
+		}
 		name = v;
 		distance = INFINITY; // start as infinity away
 		predecessor = null;
