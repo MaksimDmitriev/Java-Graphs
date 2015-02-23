@@ -185,10 +185,10 @@ public class Graph {
 		return builder.toString();
 	}
 
-	public void bfs(Vertex root) {
-		System.out.println(root);
+	public void bfs(Vertex start) {
+		System.out.println(start);
 		Queue<Vertex> queue = new LinkedList<Vertex>();
-		queue.add(root);
+		queue.add(start);
 		while (!queue.isEmpty()) {
 			Vertex u = queue.remove();
 			for (Vertex v : myAdjList.get(u)) {
@@ -204,8 +204,24 @@ public class Graph {
 		}
 	}
 
-	public void dfs(Vertex root) {
-		// TODO Auto-generated method stub
-
+	public void dfs(Vertex v) {
+        System.out.println(v);
+        v.setColor(Color.GREY); // We are going to scan v's adjacency list
+	    for (Vertex u : myAdjList.get(v)) {
+	        u.setPredecessor(v);
+	        if (u.getColor() == Color.WHITE) {
+	            dfs(u);
+	        }
+	    }
+	    v.setColor(Color.BLACK); // We scanned v's adjacency list
+	}
+	
+	/**
+	 * Calls {@link Vertex#setColor(Color)} with {@link Color#WHITE} for all vertexes of the graph
+	 */
+	public void reset() {
+	    for (Vertex vertex : myVertices.values()) {
+	        vertex.setColor(Color.WHITE);
+	    }
 	}
 }
