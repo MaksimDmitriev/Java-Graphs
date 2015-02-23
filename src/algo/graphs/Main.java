@@ -9,13 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         Graph G = new Graph(true);
-//        G.addEdge("A", "B");
-//        G.addEdge("A", "C");
-//        G.addEdge("C", "D");
-//        G.addEdge("D", "E");
-//        G.addEdge("D", "G");
-//        G.addEdge("E", "G");
-//        G.addVertex("H");
         
         G.readFromFile("graph.txt");
         
