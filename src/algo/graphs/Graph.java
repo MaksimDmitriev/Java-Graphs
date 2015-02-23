@@ -15,18 +15,18 @@ package algo.graphs;
  *  <a href="http://www.cs.princeton.edu/introcs/45graph/Graph.java">Graph.java</a> by 
  *  by Robert Sedgewick and Kevin Wayne
  */
+import algo.graphs.Vertex.Color;
+
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
-import java.util.TreeSet;
-
-import algo.graphs.Vertex.Color;
 
 public class Graph {
 
-	private HashMap<Vertex, TreeSet<Vertex>> myAdjList;
+	private HashMap<Vertex, LinkedList<Vertex>> myAdjList;
 	private HashMap<String, Vertex> myVertices;
-	private static final TreeSet<Vertex> EMPTY_SET = new TreeSet<Vertex>();
+	private static final List<Vertex> EMPTY_LIST = new LinkedList<Vertex>();
 	private int myNumVertices;
 	private int myNumEdges;
 
@@ -34,10 +34,9 @@ public class Graph {
 	 * Construct empty Graph
 	 */
 	public Graph() {
-		myAdjList = new HashMap<Vertex, TreeSet<Vertex>>();
+		myAdjList = new HashMap<Vertex, LinkedList<Vertex>>();
 		myVertices = new HashMap<String, Vertex>();
 		myNumVertices = myNumEdges = 0;
-
 	}
 
 	public HashMap<String, Vertex> getMyVertices() {
@@ -56,7 +55,7 @@ public class Graph {
 		if (v == null) {
 			v = new Vertex(name);
 			myVertices.put(name, v);
-			myAdjList.put(v, new TreeSet<Vertex>());
+			myAdjList.put(v, new LinkedList<Vertex>());
 			myNumVertices += 1;
 		}
 		return v;
@@ -133,7 +132,7 @@ public class Graph {
 	 */
 	public Iterable<Vertex> adjacentTo(String name) {
 		if (!hasVertex(name))
-			return EMPTY_SET;
+			return EMPTY_LIST;
 		return myAdjList.get(getVertex(name));
 	}
 
@@ -147,7 +146,7 @@ public class Graph {
 	 */
 	public Iterable<Vertex> adjacentTo(Vertex v) {
 		if (!myAdjList.containsKey(v))
-			return EMPTY_SET;
+			return EMPTY_LIST;
 		return myAdjList.get(v);
 	}
 
