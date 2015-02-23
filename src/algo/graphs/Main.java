@@ -1,5 +1,6 @@
 package algo.graphs;
 
+
 public class Main {
 
     static final String EOL = System.getProperty("line.separator");
@@ -7,15 +8,17 @@ public class Main {
     static final String SPACE = " ";
 
     public static void main(String[] args) {
-
         Graph G = new Graph(true);
-        G.addEdge("A", "B");
-        G.addEdge("A", "C");
-        G.addEdge("C", "D");
-        G.addEdge("D", "E");
-        G.addEdge("D", "G");
-        G.addEdge("E", "G");
-        G.addVertex("H");
+//        G.addEdge("A", "B");
+//        G.addEdge("A", "C");
+//        G.addEdge("C", "D");
+//        G.addEdge("D", "E");
+//        G.addEdge("D", "G");
+//        G.addEdge("E", "G");
+//        G.addVertex("H");
+        
+        G.readFromFile("graph.txt");
+        
         // print out G
         System.out.println(G);
         System.out.println("BFS");
