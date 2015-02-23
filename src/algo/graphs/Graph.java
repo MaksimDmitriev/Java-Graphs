@@ -29,14 +29,17 @@ public class Graph {
 	private static final List<Vertex> EMPTY_LIST = new LinkedList<Vertex>();
 	private int myNumVertices;
 	private int myNumEdges;
+	private final boolean mIsDirected;
 
 	/**
 	 * Construct empty Graph
+	 * @param directed if this graph is directed
 	 */
-	public Graph() {
+	public Graph(boolean directed) {
 		myAdjList = new HashMap<Vertex, LinkedList<Vertex>>();
 		myVertices = new HashMap<String, Vertex>();
 		myNumVertices = myNumEdges = 0;
+		mIsDirected = directed;
 	}
 
 	public HashMap<String, Vertex> getMyVertices() {
@@ -85,8 +88,7 @@ public class Graph {
 	}
 
 	/**
-	 * Is from-to, an edge in this Graph. The graph is undirected so the order
-	 * of from and to does not matter.
+	 * Is from-to, an edge in this Graph
 	 * 
 	 * @param from
 	 *            the name of the first Vertex
@@ -97,7 +99,7 @@ public class Graph {
 	public boolean hasEdge(String from, String to) {
 		if (!hasVertex(from) || !hasVertex(to))
 			return false;
-		return myAdjList.get(myVertices.get(from)).contains(myVertices.get(to));
+        return myAdjList.get(myVertices.get(from)).contains(myVertices.get(to));
 	}
 
 	/**
@@ -110,16 +112,18 @@ public class Graph {
 	 *            the name of the second Vertex
 	 */
 	public void addEdge(String from, String to) {
-		Vertex v, w;
+		Vertex fromV, toV;
 		if (hasEdge(from, to))
 			return;
 		myNumEdges += 1;
-		if ((v = getVertex(from)) == null)
-			v = addVertex(from);
-		if ((w = getVertex(to)) == null)
-			w = addVertex(to);
-		myAdjList.get(v).add(w);
-		myAdjList.get(w).add(v);
+		if ((fromV = getVertex(from)) == null)
+			fromV = addVertex(from);
+		if ((toV = getVertex(to)) == null)
+			toV = addVertex(to);
+		myAdjList.get(fromV).add(toV);
+		if (!mIsDirected) {
+		      myAdjList.get(toV).add(fromV);
+		}
 	}
 
 	/**
